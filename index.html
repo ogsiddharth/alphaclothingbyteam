@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Greetings</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="main.css">
+
+  
+  <!-- SweetAlert2 CDN -->
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <link href="https://cdn.jsdelivr.net/npm/remixicon/fonts/remixicon.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+  <nav>
+    <div class="nav1">
+      <img src="image/alpha23.png" alt="ALPHA CLOTHING Logo" class="logo">
+    </div>
+    <div class="nav2">
+      <a href="#home">HOME</a>
+      <a href="#products">PRODUCTS</a>
+      <a href="#about">ABOUT US</a>
+      <a href="#contact">CONTACT US</a>
+
+      <!-- <h4 style="cursor: pointer;" onclick="window.location.href='user.html'">
+        <i class="ri-account-circle-line"></i>
+      </h4> -->
+      
+      <h4 style="cursor: pointer;" onclick="window.location.href='cart.html'">
+        <i class="ri-shopping-cart-2-fill"></i>
+      </h4>
+
+      <!-- <h5><i class="ri-menu-3-line"></i></h5>
+    </div> -->
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#home">HOME</a>
+    <a href="#products">PRODUCTS</a>
+    <a href="#about">ABOUT US</a>
+    <a href="#contact">CONTACT US</a>
+    <a href="user.html">MY ACCOUNT</a>
+    <a href="cart.html">MY CART</a>
+  </div>
+  <!-- Hamburger icon -->
+  <!-- <div class="hamburger" onclick="toggleMenu()">☰</div> -->
+
+  <!-- Hamburger icon -->
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">☰</div>
+
+  <!-- Overlay background -->
+  <div id="overlay" class="overlay" onclick="toggleMenu()"></div>
+
+  <!-- Sidebar (hidden by default) -->
+  <div id="sidebar" class="sidebar hidden">
+    <div class="profile">
+      <div class="avatar">👤</div>
+      <h3 id="username"></h3>
+      <p id="useremail"></p>
+    </div>
+    <ul>
+      <li> <a href="user.html">Dashboard</a></li>
+      <li> <a href="men-collection.html">New collections</a></li>
+      <!-- <li>Comments</li>
+      <li>Calendar</li>
+      <li>Editor’s picks</li> -->
+      <li> <a href="signup.html" target="_self">Register</a></li>
+      <li onclick="logout()">Logout</li>
+    </ul>
+  </div>
+
+
+
+
+
+  <!-- Main content -->
+  <div class="container">
+    <h2 id="greeting"></h2>
+    <!-- <p>Welcome to your profile page 🚀</p>  -->
+  </div>
+  <section id="home" class="active">
+    <div class="banner">
+      <a href="men-collection.html">
+        <video autoplay loop muted playsinline class="banner-video">
+          <source src="banner-video.mp4" type="video/mp4">
+        </video>
+      </a>
+    </div>
+
+
+    <div class="partiton"></div>
+
+    <div class="sec2-text">
+      <div class="sec2-text-text">
+        <h2>Premium Men's Fashion</h2>
+        <p>Discover the latest trends in streetwear with our new arrivals.</p>
+      </div>
+      <div class="sec2-text-btn">
+        <a href="men-collection.html"> <button type="button" class="btn2">Shop Collection</button></a>
+      </div>
+    </div>
+  </section>
+  
+  <div class="partiton"></div>
+
+  <section id="products">
+    <span id="product-item" style="display: block; text-align: center; font-size: 2rem; margin: 20px 0;">Featured
+      Products</span>
+
+    <article>
+      <div class="cloth-container" id="productGrid"></div>
+    </article>
+  </section>
+
+  <div class="partiton"></div>
+  <div id="image"><img src="image/alpha34.png" alt=""></div>
+  <section id="about">
+    <span id="product-item" class="about-heading">About Us</span>
+    <div class="about-container">
+      <div class="about-box">
+        <h3>WHY CHOOSE ALPHA CLOTHING?</h3>
+        <p>At Alpha Clothing, we believe streetwear is more than fashion—it's a lifestyle. Our mission is to blend
+          quality, comfort, and style so you can express yourself confidently wherever you go.</p>
+      </div>
+      <div class="about-box">
+        <h3>OUR VISION</h3>
+        <p>We aim to redefine casual fashion by creating pieces that are timeless, versatile, and crafted with attention
+          to detail.</p>
+      </div>
+      <div class="about-box">
+        <h3>OUR PROMISE</h3>
+        <p>Every product is designed with passion and made to deliver durability, comfort, and a unique edge to your
+          wardrobe.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <section id="contact">
+    <span class="contact-heading">Contact Us</span>
+    <div class="contact-container">
+      <div class="contact-info">
+        <h3>Get in Touch</h3>
+        <p>Have questions or feedback? We’d love to hear from you.</p>
+        <p><strong>Email:</strong>
+          <a href="mailto:alphaclothing@gmail.com">alphaclothing@gmail.com</a>
+        </p>
+        <p><strong>Phone:</strong> +91 98765 43210</p>
+      </div>
+
+      <form class="contact-form">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="footer" id="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3>ALPHA CLOTHING</h3>
+        <p>Premium streetwear made for everyday confidence.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Newsletter</h4>
+        <div class="newsletter-box">
+          <input type="email" placeholder="Enter your email">
+          <button>Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom" style="text-align: center; padding: 20px;">
+      © 2025 Alpha Clothing. All rights reserved.
+    </div>
+  </footer>
+  <div id="cart-items"></div>
+
+  <script src="data.js"></script>
+  <script>
+    
+
+    function loadProducts() {
+      const grid = document.getElementById('productGrid');
+      grid.innerHTML = ""; // Purana content clear karein
+
+      // data.js mein jo 'products' array hai usse loop karenge
+      products.forEach(product => {
+        grid.innerHTML += `
+                <div class="box">
+                    <a href="buy.html?id=${product.id}"> 
+                        <img src="${product.image}" alt="${product.name}"> 
+                    </a>
+                    <h4>ALPHA CLOTHING</h4>
+                    <span>${product.name}</span> <br>
+                    <span class="old-price" style="text-decoration: line-through; color: gray;">₹${product.price + 500}</span>
+                    <span class="new-price" style="font-weight: bold; color: black; font-size: 1.2rem;">₹${product.price}</span>
+                    <div class="buy" style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+                      <a href="cart.html?id=${product.id}">
+          <button class="btn-cart" 
+  onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">
+  <i class="ri-shopping-cart-2-fill"></i>
+  <span>Add to Cart</span>
+</button>
+
+
+
+
+                      </a>
+                       <a href="buy.html?id=${product.id}">
+  <button type="button" class="btn-buy">
+  <i class="ri-flashlight-fill"></i>
+  <span>BUY NOW</span>
+</button>
+
+
+
+                        </a>
+                    </div>
+                </div>
+            `;
+      });
+    }
+
+    function addToCart(name, price, image) {
+      // Cart array ko localStorage se nikal lo
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      // Product object banao (image bhi include karo)
+      let product = {
+        name: name,
+        price: price,
+        image: image,   // 👈 yaha image add kiya
+        quantity: 1
+      };
+
+      // Agar same product already cart me hai to quantity badhao
+      let existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cart.push(product);
+      }
+
+      // LocalStorage me update karo
+      localStorage.setItem("cart", JSON.stringify(cart));
+
+      // Pehle wala alert hata do aur ye daal do:
+const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 2000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+});
+
+Toast.fire({
+    icon: 'success',
+    title: `${product.name} added to cart! 🛒`
+});
+    }
+
+
+    // Page load hote hi products dikhao
+    window.onload = loadProducts;
+    
+    // Mobile Menu Toggle
+    const menuBtn = document.querySelector('.nav2 h5');
+    const mobileMenu = document.getElementById('mobileMenu');
+    if (menuBtn) {
+      menuBtn.onclick = () => mobileMenu.classList.toggle('active');
+    }
+    // Get name from URL
+
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get("name");
+    //document.getElementById("greeting").innerText = `Hello, ${name}! 🎉`;
+    document.getElementById("username").innerText = name;
+    document.getElementById("useremail").innerText = "Logged in user";
+    
+    // Hide entire greeting container after 2 seconds with fade-out
+
+    
+    // Toggle sidebar + overlay + hamburger rotation
+    function toggleMenu() {
+      const sidebar = document.getElementById("sidebar");
+      const overlay = document.getElementById("overlay");
+      const hamburger = document.getElementById("hamburger");
+
+
+
+
+      // Remove hidden when opening
+      if (sidebar.classList.contains("open")) {
+        sidebar.classList.remove("open");
+        overlay.classList.remove("show");
+        hamburger.classList.remove("rotate");
+        sidebar.classList.add("hidden");
+      } else {
+        sidebar.classList.remove("hidden");
+        sidebar.classList.add("open");
+        overlay.classList.add("show");
+        hamburger.classList.add("rotate");
+      }
+    }
+
+    // Logout function
+    //   function logout() {
+    //     alert("You have been logged out!");
+    //     window.location.href = "index.html"; 
+    //   }
+
+    function logout() {
+      Swal.fire({
+        title: 'Logged Out!',
+        text: 'You have been successfully logged out.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      }).then(() => {
+        window.location.href = "index.html";
+      });
+    }
+
+
+
+
+  </script>
+
+  
+  <script src=""></script>
+</body>
+
+</html>
