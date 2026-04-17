@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - ALPHA CLOTHING</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        /* CSS IN ONE FILE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f7f7f7;
+            color: #111;
+        }
+
+        /* NAV BAR */
+        nav {
+            height: 70px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            background: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav1 img {
+            height: 50px;
+            cursor: pointer;
+        }
+
+        .nav2 {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .nav2 a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav2 a:hover {
+            color: #7b58a0;
+        }
+
+        .nav2 h4 {
+            font-size: 22px;
+            cursor: pointer;
+            color: #555;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1100px;
+            margin: 30px auto;
+            padding: 20px;
+            display: flex;
+            gap: 40px;
+            background: #fff;
+            border-radius: 12px;
+        }
+
+        .product-image {
+            flex: 1;
+        }
+
+        .product-image img {
+            width: 100%;
+            border-radius: 10px;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .product-details h1 {
+            font-size: 26px;
+            line-height: 1.2;
+        }
+
+        .price-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 10px 0;
+        }
+
+        .price {
+            font-size: 30px;
+            font-weight: 700;
+            color: #1e2939;
+        }
+
+        .old-price {
+            font-size: 18px;
+            color: #888;
+            text-decoration: line-through;
+        }
+
+        .discount {
+            color: #ff0000;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* BUTTONS STYLING */
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .btn-buy {
+            flex: 1;
+            padding: 15px;
+            background: #1e2939;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-cart {
+            flex: 1;
+            padding: 15px;
+            background: #fff;
+            color: #1e2939;
+            border: 2px solid #1e2939;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-buy:hover {
+            background: #334155;
+            transform: translateY(-2px);
+        }
+
+        .btn-cart:hover {
+            background: #f1f5f9;
+            transform: translateY(-2px);
+        }
+
+        /* SUGGESTION SECTION */
+        .suggestions {
+            max-width: 1100px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .suggestions h2 {
+            margin-bottom: 20px;
+            font-size: 22px;
+            border-left: 5px solid #1e2939;
+            padding-left: 15px;
+        }
+
+        .suggest-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .suggest-card {
+            background: #fff;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .suggest-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .suggest-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .suggest-card h4 {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .nav2 a {
+                display: none;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav1">
+            <a href="index.html"><img src="image/alpha23.png" alt="ALPHA"></a>
+        </div>
+        <div class="nav2">
+            <a href="index.html">HOME</a>
+            <a href="men-collection.html">MEN</a>
+            <h4 onclick="window.location.href='cart.html'"><i class="ri-shopping-cart-2-fill"></i></h4>
+            <h4 onclick="window.location.href='user.html'"><i class="ri-account-circle-line"></i></h4>
+        </div>
+    </nav>
+
+    <div class="container" id="product-content">
+        <div class="product-image">
+            <img id="main-img" src="image/cloths.jpg" alt="Product">
+        </div>
+        <div class="product-details">
+            <h1 id="main-title">Loading Product...</h1>
+            <div class="price-row">
+                <span class="price" id="main-price">₹0</span>
+                <span class="old-price" id="main-old-price">₹0</span>
+                <span class="discount">33% OFF</span>
+            </div>
+            <p style="color: #555;">Premium quality ALPHA CLOTHING streetwear. Built for comfort and style.</p>
+
+            <div style="margin-top: 10px;">
+                <label>Select Size:</label>
+                <select style="padding: 5px; margin-left: 10px;">
+                    <option>S</option>
+                    <option>M</option>
+                    <option>L</option>
+                    <option>XL</option>
+                </select>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-buy" onclick="buyNow()">BUY NOW</button>
+                <button class="btn-cart" id="add-to-cart-trigger">ADD TO CART</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="suggestions">
+        <h2>You May Also Like</h2>
+        <div class="suggest-grid" id="suggestion-box">
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="script.js"></script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id')) || 1;
+        const currentProd = products.find(p => p.id === id);
+
+        if (currentProd) {
+            document.getElementById('main-title').innerText = currentProd.name;
+            document.getElementById('main-price').innerText = "₹" + currentProd.price;
+            document.getElementById('main-old-price').innerText = "₹" + (currentProd.price + 500);
+            document.getElementById('main-img').src = currentProd.image;
+            document.getElementById('add-to-cart-trigger').onclick = () => addToCart(currentProd.id);
+        }
+
+        // Suggestions Logic (Random 4 products)
+        const suggestBox = document.getElementById('suggestion-box');
+        products.slice(0, 4).forEach(p => {
+            if (p.id !== id) {
+                suggestBox.innerHTML += `
+                    <a href="buy.html?id=${p.id}" class="suggest-card">
+                        <img src="${p.image}">
+                        <h4>${p.name}</h4>
+                        <p>₹${p.price}</p>
+                    </a>
+                `;
+            }
+        });
+
+      function buyNow() {
+    const size = document.querySelector("select").value;
+
+    // Payment page ko list (Array) chahiye, isliye hum [] use karenge
+    const orderData = [{
+        name: currentProd.name,
+        price: currentProd.price,
+        image: currentProd.image,
+        size: size,
+        quantity: 1 // Quantity hamesha 1 hogi buy now ke liye
+    }];
+
+    // KEY NAME: 'directOrder' hi rakhein kyunki payment.html ise hi read karta hai
+    localStorage.setItem("directOrder", JSON.stringify(orderData));
+
+    // Mode=direct bhej rahe hain taaki cart safe rahe
+    window.location.href = "payment.html?mode=direct";
+}
+    </script>
+</body>
+
+</html>
