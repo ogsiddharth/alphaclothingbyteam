@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ALPHA CLOTHING - Checkout</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        :root {
+            --fk-blue: #2874f0;
+            --fk-orange: #fb641b;
+            --bg-gray: #f1f3f6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Roboto, Arial, sans-serif; }
+
+        body { background-color: var(--bg-gray); padding-bottom: 80px; }
+
+        /* Flipkart style Header */
+        header {
+            background-color: var(--fk-blue);
+            padding: 12px 0;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content h2 { color: white; font-style: italic; font-weight: bold; }
+
+        .main-container {
+            max-width: 900px;
+            margin: 20px auto;
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 15px;
+            padding: 0 10px;
+        }
+
+        /* Section Styling */
+        .section-box {
+            background: #fff;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .section-header {
+            background: var(--fk-blue);
+            color: white;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .step-num { background: white; color: var(--fk-blue); padding: 2px 7px; border-radius: 2px; font-size: 12px; }
+
+        .section-content { padding: 20px; }
+
+        /* Address Form Styling */
+        .address-form input, .address-form textarea, .address-form select {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .address-form input:focus { border-color: var(--fk-blue); }
+
+        /* Order Summary Items */
+        .order-summary-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .order-summary-item img { width: 60px; height: 75px; object-fit: cover; }
+
+        .item-info h4 { font-size: 16px; margin-bottom: 5px; }
+
+        /* Price Sidebar */
+        .price-details { position: sticky; top: 80px; }
+        
+        .price-title {
+            padding: 15px 20px;
+            color: #878787;
+            font-weight: bold;
+            border-bottom: 1px solid #f0f0f0;
+            text-transform: uppercase;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 20px;
+            font-size: 16px;
+        }
+
+        .total-amount {
+            border-top: 1px dashed #e0e0e0;
+            border-bottom: 1px dashed #e0e0e0;
+            font-weight: bold;
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Sticky Bottom Bar for Mobile */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #fff;
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .btn-order {
+            background: var(--fk-orange);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 2px;
+            cursor: pointer;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+        .btn-order:hover {
+            background: #e03e00;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        .btn-order a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .main-container { grid-template-columns: 1fr; }
+            .price-details { position: static; }
+            .header-content h2 { font-size: 20px; }
+            
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <h2>ALPHA CLOTHING</h2>
+    </div>
+</header>
+
+<div class="main-container">
+    <div class="left-col">
+        <div class="section-box">
+            <div class="section-header">
+                <span class="step-num">1</span> DELIVERY ADDRESS
+            </div>
+            <div class="section-content address-form">
+                <input type="text" id="cust-name" placeholder="Full Name" required>
+                <input type="number" id="cust-phone" placeholder="10-digit mobile number" required>
+                <textarea id="cust-address" placeholder="Address (Area and Street)" rows="3" required></textarea>
+                <input type="number" id="cust-pincode" placeholder="Pincode" required>
+            </div>
+        </div>
+
+        <div class="section-box">
+            <div class="section-header">
+                <span class="step-num">2</span> ORDER SUMMARY
+            </div>
+            <div class="section-content" id="order-items-list">
+                </div>
+        </div>
+
+        <div class="section-box">
+            <div class="section-header">
+                <span class="step-num">3</span> PAYMENT OPTIONS
+            </div>
+            <div class="section-content">
+                <select id="pay-method" style="width: 100%; padding: 12px; border: 1px solid #ddd;">
+                    <option value="Cash on Delivery">Cash on Delivery</option>
+                    <option value="Online UPI">UPI / Online Payment</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="right-col price-details section-box">
+        <div class="price-title">Price Details</div>
+        <div class="price-row">
+            <span>Price (Items)</span>
+            <span id="subtotal">₹0</span>
+        </div>
+        <div class="price-row">
+            <span>Delivery Charges</span>
+            <span style="color: #388e3c;">FREE</span>
+        </div>
+        <div class="price-row total-amount">
+            <span>Total Payable</span>
+            <span id="final-total">₹0</span>
+        </div>
+        <div style="padding: 20px; color: #388e3c; font-weight: bold; font-size: 14px;">
+            Your total savings on this order ₹500
+        </div>
+    </div>
+</div>
+
+<div class="bottom-bar">
+    <div>
+        <div style="font-size: 12px; color: #878787;">Total Payable</div>
+        <div style="font-size: 18px; font-weight: bold;" id="bottom-total">₹0</div>
+    </div>
+    <button class="btn-order" onclick="handleOrder()">PLACE ORDER</button>
+    <button  class="btn-order"> <a href="index.html">Home</a></button>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const orderItems = JSON.parse(localStorage.getItem("directOrder")) || [];
+        const container = document.getElementById('order-items-list');
+        const subtotalEl = document.getElementById('subtotal');
+        const finalTotalEl = document.getElementById('final-total');
+        const bottomTotalEl = document.getElementById('bottom-total');
+
+        if (orderItems.length === 0) {
+            container.innerHTML = "<p>Your cart is empty!</p>";
+            return;
+        }
+
+        let total = 0;
+        let html = "";
+
+        orderItems.forEach(item => {
+            let price = parseFloat(item.price);
+            total += price;
+            html += `
+                <div class="order-summary-item">
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="item-info">
+                        <h4>${item.name}</h4>
+                        <p style="color: #878787; font-size: 14px;">Size: ${item.size || 'N/A'}</p>
+                        <p style="font-weight: bold; margin-top: 10px;">₹${price}</p>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+        subtotalEl.innerText = `₹${total}`;
+        finalTotalEl.innerText = `₹${total}`;
+        bottomTotalEl.innerText = `₹${total}`;
+    });
+
+   function handleOrder() {
+    const name = document.getElementById('cust-name').value;
+    const phone = document.getElementById('cust-phone').value;
+    const address = document.getElementById('cust-address').value;
+    const pin = document.getElementById('cust-pincode').value;
+    const method = document.getElementById('pay-method').value;
+
+    if(!name || !phone || !address || !pin) {
+        Swal.fire({
+            title: 'Opps! Details Missing',
+            text: 'Bhai, pehle apna address aur number toh bharo!',
+            icon: 'warning',
+            confirmButtonColor: '#fb641b',
+        });
+        return;
+    }
+
+    const orderItems = JSON.parse(localStorage.getItem("directOrder")) || [];
+    let itemSummary = "";
+    let total = 0;
+
+    orderItems.forEach(item => {
+        itemSummary += `- ${item.name} (Size: ${item.size || 'N/A'}, Qty: 1) \n`;
+        total += parseFloat(item.price);
+    });
+
+    const orderId = "#ALPHA" + Math.floor(Math.random() * 90000);
+    
+    const newOrder = {
+        id: orderId,
+        items: orderItems,
+        total: total,
+        customer: name,
+        address: address,
+        status: "Pending",
+        date: new Date().toLocaleString()
+    };
+
+    let history = JSON.parse(localStorage.getItem("allOrders")) || [];
+    history.unshift(newOrder);
+    localStorage.setItem("allOrders", JSON.stringify(history));
+
+    // Cart Clear Logic
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('mode') !== 'direct') {
+        localStorage.removeItem("cart");
+    }
+    localStorage.removeItem("directOrder");
+
+    const msg = `*NEW ORDER: ${orderId}*\n\n*Name:* ${name}\n*Address:* ${address}\n*Total:* ₹${total}\n*Items:*\n${itemSummary}`;
+
+    // --- YE RHA SAHI LOGIC ---
+    Swal.fire({
+        title: 'Order Placed! ✅',
+        text: 'Redirecting to WhatsApp for confirmation...',
+        icon: 'success',
+        confirmButtonColor: '#2874f0',
+        confirmButtonText: 'OK'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            // Jab user OK dabayega, tab WhatsApp khulega
+            window.open(`https://wa.me/919554781215?text=${encodeURIComponent(msg)}`, '_blank');
+            // Aur fir orders page par redirect hoga
+            window.location.href = "orders.html"; 
+        }
+    });
+}
+</script>
+
+</body>
+</html>
