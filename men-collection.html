@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men Collection - ALPHA CLOTHING</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.7.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="men-collection.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+   <nav>
+    <div class="nav1">
+      <img src="image/alpha23.png" alt="ALPHA CLOTHING Logo" class="logo">
+    </div>
+    <div class="nav2">
+      <a href="index.html">HOME</a>
+      <a href="#products">PRODUCTS</a>
+      <a href="#about">ABOUT US</a>
+      <a href="#contact">CONTACT US</a>
+
+      <h4 style="cursor: pointer;" onclick="window.location.href='user.html'">
+        <i class="ri-account-circle-line"></i>
+      </h4>
+
+      <h4 style="cursor: pointer;" onclick="window.location.href='cart.html'">
+        <i class="ri-shopping-cart-2-fill"></i>
+      </h4>
+
+      <h5><i class="ri-menu-3-line"></i></h5>
+    </div>
+  </nav>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html">HOME</a>
+    <a href="#products">PRODUCTS</a>
+    <a href="#about">ABOUT US</a>
+    <a href="#contact">CONTACT US</a>
+    <a href="user.html">MY ACCOUNT</a>
+    <a href="cart.html">MY CART</a>
+  </div>
+ 
+
+
+    <div class="men-collection-head">
+        <h2>MEN COLLECTION</h2>
+    </div>
+
+    <article>
+        <div class="cloth-container" id="product-list">
+            </div>
+    </article>
+
+    <footer class="footer">
+        <div class="footer-bottom">© 2025 Alpha Clothing. All rights reserved.</div>
+    </footer>
+
+    <script src="data.js"></script> <script src="script.js"></script> <script>
+        // Data.js se products render karne ka logic
+     function renderProducts() {
+    const container = document.getElementById('product-list');
+    if (!container) return; // Safety check
+    
+    container.innerHTML = ""; 
+
+    products.forEach(product => {
+        container.innerHTML += `
+            <div class="box">
+                <a href="buy.html?id=${product.id}">
+                    <img src="${product.image}" alt="${product.name}">
+                </a>
+                <h4>ALPHA CLOTHING</h4>
+                <span>${product.name}</span>
+                <span class="old-price">₹${product.price + 500}</span>
+                <span class="new-price">₹${product.price}</span>
+                
+                <div class="buy">
+                    <button class="btn-cart" onclick="addToCart(${product.id})">
+                        <i class="ri-shopping-cart-line"></i> ADD TO CART
+                    </button>
+                    
+                    <button type="button" class="btn-buy" onclick="window.location.href='buy.html?id=${product.id}'">
+                        <i class="ri-flashlight-line"></i> BUY NOW
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+}
+function buyNow(id) {
+    const product = products.find(p => p.id === id);
+    
+    if (product) {
+        // Ek alag key mein sirf isi product ko save karein
+        const orderData = [{
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            image: product.image,
+            quantity: 1
+        }];
+        
+        // Isse "directOrder" mein save karein taki main cart safe rahe
+        localStorage.setItem("directOrder", JSON.stringify(orderData));
+        
+        // Ab payment page par bhejein aur ek signal (parameter) bhej dein
+        window.location.href = 'payment.html?mode=direct';
+    }
+}
+        // Page load hote hi products dikhao
+        document.addEventListener('DOMContentLoaded', renderProducts);
+    </script>
+</body>
+</html>

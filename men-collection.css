@@ -1,0 +1,798 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Montserrat:wght@400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --accent-neon: #39FF14;
+}
+
+html,
+body {
+    height: 100vh;
+    width: 100%;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F7F7F7;
+    color: #111111;
+
+
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Poppins", "Montserrat", sans-serif;
+    font-weight: 700;
+}
+
+body {
+    font-family: "Inter", "Roboto", sans-serif;
+    font-weight: 400;
+}
+
+
+
+
+
+
+/*  NAV BAR */
+
+
+nav {
+    height: 70px;
+    
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 5%;
+    
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    
+    position: sticky;
+    
+    top: 0;
+    z-index: 1000;
+    
+    
+    
+}
+
+/* Logo Styling */
+.nav1 img {
+    height: 50px;
+    /* Logo की ऊँचाई एडजस्ट की */
+    width: auto;
+    padding: 0;
+    /* अनावश्यक पैडिंग हटाई */
+    margin-top: 2px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.nav1 img:hover {
+    transform: scale(1.05);
+    /* Logo पर हल्का होवर इफेक्ट */
+}
+
+/* Nav Links Container */
+.nav2 {
+    display: flex;
+    align-items: center;
+    gap: 35px;
+    /* लिंक्स के बीच की दूरी बढ़ाई */
+}
+
+/* Nav Anchor Links (HOME, PRODUCTS, etc.) */
+.nav2 a {
+    text-decoration: none;
+    color: #333333;
+    /* गहरा, स्पष्ट रंग */
+    font-weight: 500;
+    /* Semi-bold */
+    font-size: 15px;
+    letter-spacing: 0.5px;
+    padding: 5px 0;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+/* Underline Hover Effect for Links */
+.nav2 a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    display: block;
+    margin-top: 5px;
+    left: 0;
+    background: #7b58a0ed;
+    /* आपके चुने हुए रंग का इस्तेमाल */
+    transition: width 0.3s ease;
+}
+
+.nav2 a:hover {
+    color: #7b58a0ed;
+}
+
+.nav2 a:hover::after {
+    width: 100%;
+    /* होवर पर पूरी अंडरलाइन */
+}
+
+
+/* Icons (User, Cart, Account) */
+.nav2 h4 {
+    font-size: 22px;
+    /* आइकन्स का साइज़ बढ़ाया */
+    margin: 0;
+    cursor: pointer;
+    color: #555;
+    transition: color 0.3s ease, transform 0.2s;
+}
+
+.nav2 h4:hover {
+    color: #7b58a0ed;
+    transform: translateY(-2px);
+    /* हल्का लिफ्ट इफेक्ट */
+}
+
+/* Mobile Menu Icon (Burger) */
+.nav2 h5 {
+    font-size: 24px;
+    color: #333;
+    display: none;
+    /* Desktop पर छिपा हुआ */
+    cursor: pointer;
+}
+
+
+/* Hamburger icon */
+.hamburger {
+  position: fixed;
+  top: 15px;
+  right: 80px;
+  font-size: 25px;
+  cursor: pointer;
+  transition: transform 0.4s ease;
+  z-index: 1100;
+  color: #000000;
+}
+
+/* Rotation effect when active */
+.hamburger.rotate {
+  transform: rotate(90deg);
+}
+
+
+/* .hamburger:hover {
+  transform: scale(1.2);
+} */
+
+/* Overlay background */
+.overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease;
+  z-index: 900;
+}
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -280px; /* hidden initially */
+  width: 280px;
+  height: 100%;
+  background: #1e2a47; /* dark blue background */
+  color: #fff;
+  box-shadow: -3px 0 15px rgba(0,0,0,0.4);
+  padding: 30px 20px;
+  transition: right 0.4s ease;
+  z-index: 1000;
+}
+.sidebar.open {
+  right: 0;
+}
+
+/* Profile section */
+.sidebar .profile {
+  text-align: center;
+  margin-bottom: 30px;
+}
+.sidebar .avatar {
+  font-size: 50px;
+  margin-bottom: 10px;
+  color: #a29bfe; /* purple accent */
+}
+.sidebar h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+.sidebar p {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+/* Menu items */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+.sidebar ul li {
+  padding: 12px;
+  margin: 8px 0;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s, transform 0.2s;
+}
+.sidebar ul li:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateX(5px);
+}
+
+/* ======================================= */
+/* 📱 MEDIA QUERIES: Improved Mobile View */
+/* ======================================= */
+
+@media (max-width: 992px) {
+    nav {
+        padding: 0 3%;
+        /* छोटी स्क्रीन के लिए कम पैडिंग */
+    }
+    
+    .nav2 {
+        gap: 20px;
+    }
+
+    .nav2 a {
+        font-size: 14px;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        height: 60px;
+        padding: 0 20px;
+    }
+    
+    .nav1 img {
+        height: 40px;
+        /* मोबाइल पर लोगो को छोटा किया */
+    }
+
+    .nav2 a {
+        display: none;
+        /* Links को पूरी तरह से छिपा दिया */
+    }
+
+    .nav2 h4 {
+        font-size: 18px;
+        /* आइकन्स का साइज़ एडजस्ट किया */
+    }
+    
+    .nav2 h5 {
+        display: block;
+        /* Hamburger Icon दिखाएं */
+    }
+    
+    .nav2 {
+        gap: 15px;
+    }
+
+}
+
+
+/* ======================================= */
+/* 🍔 MOBILE MENU CSS (main.css) */
+/* ======================================= */
+
+.mobile-menu {
+    position: fixed;
+    top: 70px; /* Nav bar की ऊँचाई के नीचे शुरू करें */
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.98); /* हल्का पारदर्शी सफेद बैकग्राउंड */
+    z-index: 999; /* Nav bar (1000) से थोड़ा कम */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transform: translateX(-100%); /* मेन्यू को स्क्रीन से बाहर छिपाएँ */
+    transition: transform 0.4s ease-in-out; /* स्मूद एनिमेशन */
+}
+
+.mobile-menu.active {
+    transform: translateX(0); /* जब active क्लास हो तो मेन्यू दिखाएँ */
+    overflow-y: auto; /* अगर सामग्री लंबी हो तो स्क्रॉल करने की अनुमति दें */
+}
+
+.mobile-menu a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.5em; /* लिंक्स का साइज़ बढ़ाएँ */
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    font-weight: 500;
+}
+
+.mobile-menu a:hover {
+    color: #7b58a0ed;
+}
+
+/* 768px से ऊपर के लिए, मेन्यू को हमेशा छिपाना सुनिश्चित करें */
+@media (min-width: 769px) {
+    .mobile-menu {
+        display: none;
+    }
+}
+
+
+
+/* cloth section */
+.cloth-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* grid-template-columns: 1fr 1fr; */
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+    /* padding: 20px 0 0 130px; */
+    /* background-color: red; */
+}
+
+ .phone {
+    display: none;
+ }
+
+@media (max-width:768px) {
+    .cloth-container {
+        grid-template-columns: 1fr 1fr;
+
+        
+        
+        padding: 0px;
+        column-gap: 9px;
+        row-gap: inherit;
+
+
+    }
+
+     .box {
+        margin-top: 15px;
+        width: 200px;
+        height: 300px;
+        box-sizing: border-box;
+       overflow: hidden;
+    }
+    
+
+    .men-collection-head h2{
+        font-size: 28px;
+        text-decoration: underline;
+        
+    }
+    .phone {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-top: 5px;
+    }
+
+   
+}
+
+
+
+
+
+
+
+
+/* cloth section */
+article {
+    display: flex;
+    justify-content: center;
+}
+
+.box {
+    border: 1px solid #000000;
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+
+}
+
+
+.box img {
+    margin-top: -1px;
+    transition: box-shadow 0.3s;
+    width: 250px;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.box img:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.box h4 {
+    margin: 10px 0 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.box span {
+    font-size: 16px;
+    color: #666;
+}
+
+span.old-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-left: 10px;
+}
+
+span.new-price {
+    color: #e60000;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+span.discount {
+    color: #008000;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+@media (max-width:768px) {
+    .box img {
+        width: 150px;
+        height: auto;
+    }
+
+    .box h4 {
+        font-size: 14px;
+    }
+
+    .box span {
+        font-size: 12px;
+    }
+
+    .box button {
+        margin-top: -7px;
+        padding: 5px 6px;
+        font-size: 10px;
+        display: none;
+    }
+
+    .box {
+        width: 180px;
+        height: 260px;
+    }
+}
+
+
+
+
+/* cloth buying  */
+.buy {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.btn-cart,
+.btn-buy {
+    font-size: 10px;
+    padding: 13px 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.25s ease;
+}
+
+.btn-cart {
+    
+    background-color: #ffffffed;
+    color: #000000;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 25px 3px rgba(0, 0, 0, 0.096);
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.25s , background-color 0.3s, color 0.3s;
+}
+
+.btn-cart:hover {
+   
+    background-color: #1E2939;
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.05);
+}
+
+.btn-buy {
+    background-color: #1E2939;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 25px 3px rgba(0, 0, 0, 0.096);
+    text-decoration: none;
+    display: inline-block;
+    transition: transform 0.25s , background-color 0.3s, color 0.3s;
+}
+
+.btn-buy:hover {
+    
+    background-color: #1e2939e8;
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.05);
+}
+
+.men-collection-head {
+    text-align: center;
+    margin: 40px 0 20px 0;
+    font-size: 32px;
+    font-weight: 700;
+    color: #333333;
+}
+.men-collection-head h2 {
+    margin: 0;
+    text-decoration: underline;
+}
+
+
+
+
+
+/* Footer -section */
+.footer {
+    background: #111111;
+    color: #ffffff;
+    padding: 60px 30px 30px;
+    font-family: "Inter", sans-serif;
+}
+
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.footer-section h3 {
+    font-family: "Poppins", sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.footer-section h4 {
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.footer-section p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #d3d3d3;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: #d3d3d3;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s;
+}
+
+.footer-section ul li a:hover {
+    color: #39FF14;
+}
+
+.newsletter-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.newsletter-box input {
+    padding: 10px;
+    border-radius: 6px;
+    border: none;
+    flex: 1;
+}
+
+.newsletter-box button {
+    background: #39FF14;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    color: #111111;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 13px;
+    color: #888;
+}
+
+
+
+
+
+/* section4 */
+.section-4 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 25px;
+    /* background-color: rgb(0, 153, 255); */
+    font-size: 20px;
+
+    padding: 30px;
+}
+
+.secton4-text h3 {
+    font-weight: bolder;
+    color: #000;
+}
+
+.sec4-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    gap: 20px;
+    padding: 20px 0 0 130px;
+
+
+}
+
+@media (max-width:768px) {
+    .sec4-container {
+        grid-template-columns: 1fr;
+        padding: 0;
+    }
+}
+
+
+
+
+
+
+/* section3 */
+.section-3 {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 30px;
+    /* background-color: rgb(0, 153, 255); */
+    font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    padding-top: 30px;
+}
+
+.model3 img {
+    width: 95%;
+    height: auto;
+    border-radius: 6px;
+    overflow: hidden;
+    display: block;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.308);
+    margin: 1px auto;
+
+}
+
+@media (max-width:768px) {
+    .section-3 {
+        font-size: 15px;
+        margin: 5px 0px;
+        padding: 15px 0px;
+    }
+}
+
+
+
+section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#about span{
+    font-size: 50px;
+    font-weight: bolder;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    
+}
+@media (max-width:768px) {
+    #about span{
+        font-size: 25px;
+        font-weight: 700;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        
+    }
+}
+#contact span{
+    font-size: 50px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+}
+@media (max-width:768px) {
+    #contact span{
+        font-size: 25px;
+        font-weight: bolder;
+    
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        
+    }
+}
+#product-item{
+    font-size: 50px;
+    font-weight: 700;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+   
+}
+
+
+
+.partiton {
+    height: 2px;
+    width: 100%;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+}
